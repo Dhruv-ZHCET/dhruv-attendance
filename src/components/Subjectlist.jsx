@@ -39,7 +39,7 @@ function Subjectlist() {
           <Sidebar.ItemGroup>
             {/* Map through each item and assign a different color */}
             {['Signal and System', 'Discrete Mathematics', 'Numerical Analysis and Probability', 'Software Engineering', 'Design and Analysis of Algorithm', 'Computer Architecture'].map((subject, index) => (
-              <StyledItem key={index} style={{
+              <StyledItem className="hover:cursor-pointer" key={index} style={{
                 background: `linear-gradient(135deg, ${colors[index % colors.length]}, #333)`,
                 border: `2px solid ${colors[index % colors.length]}`,
                 borderRadius: '5px'
