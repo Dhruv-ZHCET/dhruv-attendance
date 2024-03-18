@@ -1,19 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Calendar.css';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import PercentageWheel from './PercentageWheel';
+import axios from "axios";
 
 const Calendar = () => {
   const [colors, setColors] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
+  useEffect(() => {
+    const putData = async () => {
+        try {
+          const log = await axios.post("http://localhost:3000/api/v1/subject/signal", {
+            subjectName: "signal",
+            colors: {
+              colors: colors
+            },
+            red: red,
+            green: green
+          });
+          console.log(log);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+    };
+    putData();
+  }, [colors]); 
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/v1/subject/signal");
+        console.log("Response data:", response.data.sub.colors.colors);
+        setColors(response.data.sub.colors.colors);
+        setRed(response.data.sub.red);
+        setGreen(response.data.sub.green);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []); 
 
   const daysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
   };
-
   const firstDayOfMonth = (year, month) => {
     return new Date(year, month, 1).getDay();
   };
@@ -27,6 +61,7 @@ const Calendar = () => {
   };
 
   const handleItemClick = (day, color) => {
+
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth();
     const key = `${year}-${month}`;

@@ -34,7 +34,8 @@ function Subjectlist() {
   return (
     <div>
       <StyledHeading>Subjects</StyledHeading>
-      <StyledSidebar aria-label="Default sidebar example" className='flex justify-center'>
+      <div className='flex justify-center'>
+      <StyledSidebar aria-label="Default sidebar example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             {/* Map through each item and assign a different color */}
@@ -44,6 +45,7 @@ function Subjectlist() {
                 border: `2px solid ${colors[index % colors.length]}`,
                 borderRadius: '5px'
               }}
+              className="hover:cursor-pointer"
                 onClick={() => {
                   navigate(`/${subject}`)
                 }}>
@@ -53,6 +55,7 @@ function Subjectlist() {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </StyledSidebar>
+      </div>
     </div>
   );
 }
