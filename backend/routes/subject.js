@@ -280,10 +280,10 @@ router.post("/arch",async (req,res)=>
     key:"log created",
   })
 })
-router.get("/Computer Architecture",async(req,res)=>
+router.get("/arch",async(req,res)=>
 {
   const sub = await Subject.findOne({
-    subjectName:"Computer Architecture",
+    subjectName:"arch",
   });
   if(sub)
   {

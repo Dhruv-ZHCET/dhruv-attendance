@@ -5,7 +5,7 @@ import { Dropdown, Space } from 'antd';
 import PercentageWheel from './PercentageWheel';
 import axios from "axios";
 
-const Calendar = () => {
+const Calendar = ({subject}) => {
   const [colors, setColors] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [red, setRed] = useState(0);
@@ -13,8 +13,8 @@ const Calendar = () => {
   useEffect(() => {
     const putData = async () => {
         try {
-          const log = await axios.post("http://localhost:3000/api/v1/subject/signal", {
-            subjectName: "signal",
+          const log = await axios.post(`http://localhost:3000/api/v1/subject/${subject}`, {
+            subjectName: subject,
             colors: {
               colors: colors
             },
@@ -32,7 +32,7 @@ const Calendar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/subject/signal");
+        const response = await axios.get(`http://localhost:3000/api/v1/subject/${subject}`);
         console.log("Response data:", response.data.sub.colors.colors);
         setColors(response.data.sub.colors.colors);
         setRed(response.data.sub.red);
