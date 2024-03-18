@@ -5,7 +5,7 @@ const { Subject } = require("../db")
 
 router.post("/signal",async (req,res)=>
 {
-  const colors = req.body;
+  
   const succes = await Subject.findOne({
     subjectName:"Signal and Systems",
   });
