@@ -71,8 +71,8 @@ const Calendar = ({subject}) => {
     }
     if (updatedColors[key][day] === "red") setRed(red => red - 1);
     if (updatedColors[key][day] === "green") setGreen(green => green - 1);
-    if (color === "red") setRed(red => red + 1);
-    if (color === "green") setGreen(green => green + 1);
+    if (color === "pink") setRed(red => red + 1);
+    if (color === "lightgreen") setGreen(green => green + 1);
     updatedColors[key][day] = color;
     setColors(updatedColors);
   };
@@ -107,11 +107,11 @@ const Calendar = ({subject}) => {
                 menu={{
                   items: [
                     {
-                      label: <div onClick={() => handleItemClick(day, 'green')}>Attended</div>,
+                      label: <div onClick={() => handleItemClick(day, 'lightgreen')}>Attended</div>,
                       key: '0',
                     },
                     {
-                      label: <div onClick={() => handleItemClick(day, 'red')}>Missed</div>,
+                      label: <div onClick={() => handleItemClick(day, 'pink')}>Missed</div>,
                       key: '1',
                     },
                   ],
